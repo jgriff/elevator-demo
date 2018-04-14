@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.github.jgriff.kuali'
+version = '0.0.1.BUILD-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'io.projectreactor:reactor-core'
+    
+    // project lombok is an annotation processor, and declaring it as such affords us better incremental build support from Gradle
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    
+    // test dependencies
+    testCompile('org.springframework.boot:spring-boot-starter-test') { exclude group: 'junit', module: 'junit' }
+    testCompile 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine' 
+    testCompile "org.junit.jupiter:junit-jupiter-params:${dependencyManagement.importedProperties['junit-jupiter.version']}"
+    testCompile 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    manifest {
+        attributes("Implementation-Title": project.name)
+        attributes("Implementation-Version": version)
+    }
+}
