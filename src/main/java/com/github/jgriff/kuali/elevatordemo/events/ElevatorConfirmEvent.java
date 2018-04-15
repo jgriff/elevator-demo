@@ -1,7 +1,10 @@
 package com.github.jgriff.kuali.elevatordemo.events;
 
+import com.github.jgriff.kuali.elevatordemo.Identifiable;
 import lombok.NonNull;
 import lombok.Value;
+
+import java.util.UUID;
 
 /**
  * Event signaling a confirmation response to requesting and elevator.  
@@ -10,7 +13,8 @@ import lombok.Value;
  * @since 0.0.0
  */
 @Value
-public class ElevatorConfirmEvent {
+public class ElevatorConfirmEvent implements Identifiable<UUID> {
+    private final UUID id = UUID.randomUUID();
     private final ElevatorRequestEvent confirmationOf;
 
     public boolean isConfirming(@NonNull ElevatorRequestEvent candidate) {
