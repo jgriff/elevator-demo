@@ -11,6 +11,7 @@ import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import javax.annotation.PostConstruct;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -183,7 +184,7 @@ public class BasicElevator implements Elevator {
                         .build());        
     }
     
-    private void publishCurrentStatus() {
+    public void publishCurrentStatus() {
         eventPublisher.publishEvent(ElevatorStatusUpdateEvent.forStatus(currentStatus()));
     }
     
@@ -196,7 +197,7 @@ public class BasicElevator implements Elevator {
                 .build();
     }
     
-    private void publishCurrentDiagnostic() {
+    public void publishCurrentDiagnostic() {
         eventPublisher.publishEvent(ElevatorDiagnosticUpdateEvent.forDiagnostic(currentDiagnostic()));
     }
     

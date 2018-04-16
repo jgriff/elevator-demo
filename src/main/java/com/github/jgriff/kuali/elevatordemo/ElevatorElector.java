@@ -40,7 +40,7 @@ public class ElevatorElector {
      * before it can make a decision.
      */
     @EventListener
-    public void onElevatorStatusUpdate(@NonNull ElevatorStatusUpdateEvent elevatorEvent) {
+    public void onElevatorStatusUpdate(ElevatorStatusUpdateEvent elevatorEvent) {
         Mono.just(elevatorEvent)
                 .map(ElevatorStatusUpdateEvent::getStatusUpdate)
                 .subscribe((s) -> latestElevatorStatuses.put(s.getDescriptor().getId(), s));

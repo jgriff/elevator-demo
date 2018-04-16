@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.given;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
